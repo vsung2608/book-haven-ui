@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
+import {RouterLink} from '@angular/router';
+import {InputTextModule} from 'primeng/inputtext';
+import {FloatLabelModule} from 'primeng/floatlabel';
 
 @Component({
   selector: 'app-sig-up',
-  standalone: true,
-  imports: [],
-  templateUrl: './sig-up.component.html',
-  styleUrl: './sig-up.component.css'
+  imports: [RouterLink, InputTextModule, FloatLabelModule],
+  templateUrl: './sign-up.component.html',
+  styleUrl: './sign-up.component.css'
 })
 export class SignUpComponent {
 

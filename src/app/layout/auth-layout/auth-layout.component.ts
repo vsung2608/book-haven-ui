@@ -3,11 +3,11 @@ import {RouterOutlet} from '@angular/router';
 
 @Component({
   selector: 'app-auth-layout',
-  standalone: true,
   imports: [
     RouterOutlet
   ],
   templateUrl: './auth-layout.component.html',
+  standalone: true,
   styleUrl: './auth-layout.component.css'
 })
 export class AuthLayoutComponent {

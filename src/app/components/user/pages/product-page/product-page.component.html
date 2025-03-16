@@ -1,0 +1,130 @@
+<section id="products" class="section">
+  <div class="container">
+    <div class="row">
+      <!-- Sidebar -->
+      <div class="col-12">
+        <div class="row align-items-center d-flex justify-content-between mb-3">
+          <div class="col-md-6 d-flex">
+            <input id="searchField" type="text" placeholder="Nhập thông tin sản phẩm...">
+            <button id="searchBtn">Tìm kiếm</button>
+          </div>
+
+          <div class="col-md-3">
+            <select id="selectQuantity">
+              <option value="1">1 sản phẩm</option>
+              <option value="2">2 sản phẩm</option>
+              <option value="3">3 sản phẩm</option>
+              <option value="4">4 sản phẩm</option>
+              <option value="5">5 sản phẩm</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <!-- Main Content -->
+      <div class="col-3">
+        <aside id="sidebar" class="sidebar" th:fragment="sidebar">
+
+          <ul class="sidebar-nav" id="sidebar-nav">
+
+            <li class="nav-item">
+              <a class="nav-link " href="index.html">
+                <i class="bi bi-grid"></i>
+                <span>Dashboard</span>
+              </a>
+            </li><!-- End Dashboard Nav -->
+
+            <li class="nav-item">
+              <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-menu-button-wide"></i><span>Thêm dữ liệu</span><i class="bi bi-chevron-down ms-auto"></i>
+              </a>
+              <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                  <a href="">
+                    <i class="bi bi-circle"></i><span>Sản phẩm</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="components-accordion.html">
+                    <i class="bi bi-circle"></i><span>Hãng cung cấp</span>
+                  </a>
+                </li>
+              </ul>
+            </li><!-- End Components Nav -->
+
+            <li class="nav-item">
+              <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-layout-text-window-reverse"></i><span>Quản lý dữ liệu</span><i
+                class="bi bi-chevron-down ms-auto"></i>
+              </a>
+              <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                  <a th:href="@{/admin/products}">
+                    <i class="bi bi-circle"></i><span>Sản phẩm</span>
+                  </a>
+                </li>
+              </ul>
+            </li><!-- End Tables Nav -->
+
+            <li class="nav-item">
+              <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-gem"></i><span>Icons</span><i class="bi bi-chevron-down ms-auto"></i>
+              </a>
+              <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                  <a href="icons-bootstrap.html">
+                    <i class="bi bi-circle"></i><span>Bootstrap Icons</span>
+                  </a>
+                </li>
+              </ul>
+            </li><!-- End Icons Nav -->
+
+          </ul>
+        </aside><!-- End Sidebar-->
+      </div>
+      <div class="col-9">
+        <div class="row">
+          <div class="col-12">
+            <div class="button-container" role="group">
+              <button class="btn" #btn1 (click)="setActive(btn1); onTotalProductsPage()">Tất cả sản phẩm</button>
+              <button class="btn" #btn2 (click)="setActive(btn2); onLatestProductsPage()">Mới nhất</button>
+              <button class="btn" #btn3 (click)="setActive(btn3); onBestSellerProductsPage()">Bán chạy nhất</button>
+              <button class="btn" #btn4 (click)="setActive(btn4); onSortedByAscPricePage()">Giắ thấp đến cao</button>
+              <button class="btn" #btn5 (click)="setActive(btn5); onSortedByDescPricePage()">Giá cao đến thấp</button>
+            </div>
+          </div>
+          <div class="product-container"
+               infiniteScroll
+               [infiniteScrollDistance]="2"
+               [infiniteScrollThrottle]="50"
+               (scrolled)="loadMoreProducts()"
+               [scrollWindow]="false">
+
+          </div>
+          <div class="col-md-3 col-sm-4 mb-3 pro-d">
+            <div class="product-grid">
+              <div class="product-image">
+                <a href="#" class="image">
+                  <img src="https://bizweb.dktcdn.net/100/363/455/products/cuon-sach-hoang-da-01.jpg?v=1740449676720" class="img-fluid zoom" alt="book-1">
+                </a>
+                <span  class="product-discount-label">10%</span>
+                <ul class="product-links">
+                  <li><a href="#"><i class="bi bi-cart-plus"></i></a></li>
+                  <li><a href="#"><i class="bi bi-heart"></i></a></li>
+                  <li><a href="#"><i class="bi bi-shuffle"></i></a></li>
+                </ul>
+                <a href="#" class="add-to-cart">Xem
+                  chi tiết</a>
+              </div>
+              <div class="product-content">
+                <h3 class="title"><a href="#"> San pham 1</a></h3>
+                <div class="price"> 100.000₫</div>
+                <input type="hidden" class="dis-price"/>
+                <div class="text-warning">★★★★☆</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

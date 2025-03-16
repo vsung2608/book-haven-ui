@@ -7,8 +7,8 @@
 
     <nav id="navmenu" class="navmenu">
       <ul>
-        <li><a href="#" class="active">Home</a></li>
-        <li class="dropdown"><a href="#"><span>Categories</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+        <li><a href="#" class="active">Trang chủ</a></li>
+        <li class="dropdown"><a href="#"><span>Thể loại</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
           <ul>
             <li><a href="#">Team</a></li>
             <li><a href="#">Testimonials</a></li>
@@ -23,18 +23,18 @@
             </li>
           </ul>
         </li>
-        <li><a href="#">Products</a></li>
+        <li><a routerLink="products">Sản phẩm</a></li>
         <li><a href="#">Portfolio</a></li>
         <li><a href="#">Pricing</a></li>
-        <li><a routerLink="blogs">Blog</a></li>
+        <li><a routerLink="blogs">Blogs</a></li>
         <li><a href="#">Contact</a></li>
       </ul>
       <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
     </nav>
 
     <div class="header-links">
-      <button class="me-2 fw-bold">Sign In</button>
-      <button class="fw-bold">Register</button>
+      <button class="me-2 fw-bold" (click)="navigateToSignInPage()">Đăng nhập</button>
+      <button class="fw-bold" (click)="navigateToSignUpPage()">Đăng ký</button>
     </div>
 
   </div>
