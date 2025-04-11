@@ -1,0 +1,122 @@
+<div class="main" id="main">
+  <div class="row">
+    <div class="col-8">
+      <form [formGroup]="form">
+        <div class="address-confirm row mb-4">
+          <div class="col-12 fs-3 fw-bold">Địa chỉ nhận hàng</div>
+          <div class="col-4 mt-3">
+            <p-floatlabel variant="on">
+              <input pInputText id="fullName"  autocomplete="off" formControlName="fullName"/>
+              <label for="fullName">Họ và tên</label>
+            </p-floatlabel>
+          </div>
+          <div class="col-4 mt-3">
+            <p-floatlabel variant="on" >
+              <input pInputText id="phoneNumber" autocomplete="off" formControlName="phoneNumber"/>
+              <label for="phoneNumber">Số điện thoại</label>
+            </p-floatlabel>
+          </div>
+          <div class="col-4 mt-3">
+            <p-floatlabel variant="on">
+              <input pInputText id="email" autocomplete="off" formControlName="email"/>
+              <label for="email">Email</label>
+            </p-floatlabel>
+          </div>
+          <div class="col-4 mt-3">
+            <p-floatlabel class="w-full md:w-56" variant="on">
+              <p-select inputId="city" [(ngModel)]="cityVal" [options]="cities" optionLabel="name" class="w-100 p-1" id="city"/>
+              <label for="city">Tỉnh/Thành phố</label>
+            </p-floatlabel>
+          </div>
+          <div class="col-4 mt-3">
+            <p-floatlabel class="w-full md:w-56" variant="on">
+              <p-select inputId="city" [(ngModel)]="disticVal" [options]="cities" optionLabel="name" class="w-100 p-1" id="district"/>
+              <label for="district">Huyện</label>
+            </p-floatlabel>
+          </div>
+          <div class="col-4 mt-3">
+            <p-floatlabel class="w-full md:w-56" variant="on">
+              <p-select inputId="city" [(ngModel)]="villageVal" [options]="cities" optionLabel="name" class="w-100 p-1" id="village"/>
+              <label for="village">Thôn/Xã</label>
+            </p-floatlabel>
+          </div>
+          <div class="col-12 mt-3">
+            <p-floatlabel variant="on">
+              <input pInputText id="detailAddress" autocomplete="off" formControlName="detailAddress"/>
+              <label for="detailAddress">Địa chỉ chi tiết</label>
+            </p-floatlabel>
+          </div>
+          <div class="col-12 mt-3">
+            <p-floatlabel variant="on">
+              <input pInputText id="note" autocomplete="off" formControlName="note"/>
+              <label for="note">Ghi chú</label>
+            </p-floatlabel>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-4">
+      <div class="payment-method">
+        <div class="col-12 fs-3 fw-bold mb-3">Phương thức thanh toán</div>
+        <div
+          class="method d-flex align-items-center mb-2" [class.active]="selectedMethod === PaymentMethod.COD" (click)="selectMethod(PaymentMethod.COD)">
+          <div class="icon me-2"><i class="bi bi-receipt"></i></div>
+          <div class="fs-5">Thanh toán khi nhận hàng</div>
+        </div>
+
+        <div class="method d-flex align-items-center mb-2" [class.active]="selectedMethod === PaymentMethod.QR" (click)="selectMethod(PaymentMethod.QR)">
+          <div class="icon me-2"><i class="bi bi-receipt"></i></div>
+          <div class="fs-5">Thanh toán bằng mã QR</div>
+        </div>
+
+        <div class="method d-flex align-items-center mb-2" [class.active]="selectedMethod === PaymentMethod.ATM" (click)="selectMethod(PaymentMethod.ATM)">
+          <div class="icon me-2"><i class="bi bi-receipt"></i></div>
+          <div class="fs-5">Thanh toán bằng thẻ ATM</div>
+        </div>
+
+        <div class="method d-flex align-items-center mb-2" [class.active]="selectedMethod === PaymentMethod.EWALLET" (click)="selectMethod(PaymentMethod.EWALLET)">
+          <div class="icon me-2"><i class="bi bi-receipt"></i></div>
+          <div class="fs-5">Thanh toán bằng ví điện tử</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="list-product mb-4 row">
+    <div class="fs-3 fw-bold">Sản phẩm</div>
+    <hr>
+    @for(item of products; track item.productId){
+      <div class="product-contain d-flex justify-content-between align-items-center mb-3">
+        <div class="info d-flex align-items-center">
+          <div class="image">
+            <img src="{{item.imageUrl}}" alt="anh-sp">
+          </div>
+          <div>
+            <div class="fs-5 fw-bold"> {{ item.productName }} </div>
+            <div>Tac gia: </div>
+            <div> So luong: {{item.quantity}}</div>
+          </div>
+        </div>
+        <div class="price">
+          <div class="fs-5 fw-bold"> {{item.promotionalPrice}} </div>
+          <div class="text-decoration-line-through"> {{item.price}} </div>
+        </div>
+      </div>
+      <hr>
+    }
+    <div class="mb-3">
+      <div class="fs-6 fw-bold mb-2">Đơn vị vận chuyển: VN Express</div>
+      <div class="fs-6 fw-bold mb-2">Chi phí vận chuyển: 32.000VND</div>
+      <div class="fs-6 fw-bold">Vận chuyển từ: <span class="text-success">Nam Tu Liem</span> toi <span class="text-success">Bac Tu Liem</span></div>
+    </div>
+    <hr>
+    <div class="text-end fw-bold">
+      Tổng tiền: <span class="text-danger fs-4">1.700.000VND</span>
+    </div>
+    <div class="text-center">
+      <button (click)="order($event)">Xac nhan dat hang</button>
+    </div>
+  </div>
+</div>
+<p-toast></p-toast>
+<p-confirmdialog />

@@ -1,0 +1,80 @@
+#main{
+  padding: 40px;
+}
+
+.header{
+  height: 70px;
+  font-weight: bold;
+}
+
+.header>div{
+  padding: 0 !important;
+}
+
+.header, .content{
+  padding: 20px;
+  width: 100%;
+  box-shadow: 0 0 20px rgba(1, 41, 112, 0.1);
+  margin:  0 0 10px 0!important;
+}
+
+.header #pick-code{
+  border-radius: 20px;
+  border: none;
+  background: #059652;
+  color: white;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 0 15px;
+}
+
+.content .image{
+  width: 100px;
+  aspect-ratio: 2/3;
+  object-fit: cover;
+}
+
+.content .image img{
+  width: 100%;
+  height: 100%;
+}
+
+.content .s-price{
+  text-line-through: single;
+}
+
+.content .contain-product{
+  padding: 0 !important;
+}
+
+.quantity{
+  width: 50px;
+  height: 30px;
+  border: none;
+  text-align: center;
+}
+
+.upQuantity, .downQuantity{
+  width: 30px;
+  height: 30px;
+  border: none;
+  background: #059652;
+  color: white;
+}
+
+.content .order{
+  background: #059652;
+  color: white;
+  font-weight: bold;
+}
+
+.upQuantity:hover, .downQuantity:hover, .header #pick-code:hover, .content .order:hover{
+  background: white;
+  color: #059652;
+  outline: 1px solid #059652;
+}
+
+.delete-btn{
+  cursor: pointer;
+}
+

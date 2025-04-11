@@ -1,0 +1,164 @@
+.main{
+  padding: 50px 0;
+}
+.main .right-content, .main .left-content{
+  padding: 30px;
+  box-shadow: 0 0 20px rgba(1, 41, 112, 0.1);
+}
+
+.main .right-content .button button{
+  padding: 10px 30px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  box-shadow: 0 0 20px rgba(1, 41, 112, 0.1);
+}
+
+.main .right-content .button button:nth-child(1){
+  background: #059652;
+  color: white;
+}
+
+.main .right-content .button button:nth-child(2){
+  background: #565656;
+  color: white;
+}
+
+.main .right-content .button div{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #059652;
+  color: white;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.main .right-content .button button:nth-child(1):hover{
+  background: #0bc26a;
+}
+
+.main .right-content .button button:nth-child(2):hover{
+  background: #727272;
+}
+
+.main .right-content .button div:hover{
+  background: #0bc26a;
+}
+
+.quantity{
+  width: 50px;
+  height: 30px;
+  border: none;
+  text-align: center;
+}
+
+.upQuantity, .downQuantity{
+  width: 30px;
+  height: 30px;
+  border: none;
+  background: #059652;
+  color: white;
+}
+
+.upQuantity:hover, .downQuantity:hover, .header #pick-code:hover, .content .order:hover{
+  background: white;
+  color: #059652;
+  outline: 1px solid #059652;
+}
+
+.main .right-content .child-title{
+  width: 20%;
+}
+
+.card{
+  border: none !important;
+}
+
+
+/*Tab 2*/
+.rating-average{
+  font-size: 140px;
+  font-weight: bold;
+}
+
+.side {
+  float: left;
+  width: 10%;
+  margin-top: 10px;
+}
+
+.middle {
+  float: left;
+  width: 80%;
+  margin-top: 10px;
+}
+
+/* Place text to the right */
+.right {
+  text-align: right;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* The bar container */
+.bar-container {
+  width: 100%;
+  background-color: #f1f1f1;
+  text-align: center;
+  color: white;
+}
+
+/* Individual bars */
+.bar-5 {width: 60%; height: 18px; background-color: #04AA6D;}
+.bar-4 {width: 30%; height: 18px; background-color: #2196F3;}
+.bar-3 {width: 10%; height: 18px; background-color: #00bcd4;}
+.bar-2 {width: 4%; height: 18px; background-color: #ff9800;}
+.bar-1 {width: 15%; height: 18px; background-color: #f44336;}
+
+/* Responsive layout - make the columns stack on top of each other instead of next to each other */
+@media (max-width: 400px) {
+  .side, .middle {
+    width: 100%;
+  }
+  /* Hide the right column on small screens */
+  .right {
+    display: none;
+  }
+}
+
+/*Tab 3*/
+.comment-form{
+  border: 1px solid #059652;
+  padding: 5px;
+  border-radius: 80px;
+  margin-top: 20px;
+}
+
+.comment-form input, button{
+  border: none;
+}
+
+.comment-form button{
+  background: #059652;
+  color: white;
+  padding: 5px;
+  width: 80px;
+  border-radius: 25px;
+}
+
+.comment-form input{
+  width: calc(100% - 80px);
+  outline: none;
+  padding: 5px 10px;
+  border-radius: 25px;
+}
+

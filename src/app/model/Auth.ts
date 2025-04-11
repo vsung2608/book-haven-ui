@@ -6,4 +6,13 @@ export interface LoginRequest{
 export interface TokenResponse{
   accessToken: string;
   refreshToken: string;
+  expiresIn: number;
+}
+
+export interface RegisterRequest{
+  username: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
 }

@@ -8,11 +8,11 @@ import Swiper from 'swiper';
 @Component({
   selector: 'app-main-layout',
   imports: [FooterComponent, HeaderComponent, RouterOutlet],
-  templateUrl: './main-layout.component.html',
+  templateUrl: './user-layout.component.html',
   standalone: true,
-  styleUrl: './main-layout.component.css'
+  styleUrl: './user-layout.component.css'
 })
-export class MainLayoutComponent implements OnInit, AfterViewInit{
+export class UserLayoutComponent implements OnInit, AfterViewInit{
   ngOnInit(): void {
     this.initMobileNav();
     this.initScrollEvents();

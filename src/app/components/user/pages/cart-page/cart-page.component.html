@@ -1,0 +1,91 @@
+<main class="main" id="main">
+  <div class="row">
+    <div class="col-md-12 col-lg-9" *ngIf="items$ | async as items">
+      @if(items.length > 0){
+        <div class="header row d-flex justify-content-between align-items-center mb-2">
+          <div class="col-1">
+            <p-checkbox inputId="ingredient1" [(ngModel)]="selectedAll" binary="true" (onChange)="selectAllProduct()"/>
+          </div>
+          <div class="col-4"> Sản phẩm </div>
+          <div class="col-2"> Đơn giá </div>
+          <div class="col-2"> Số lượng </div>
+          <div class="col-2"> Thành tiền </div>
+          <div class="col-1 text-danger delete-btn" (click)="deleteALlItems()"><i class="bi bi-trash-fill"></i></div>
+        </div>
+      }
+      <div class="content row d-flex justify-content-between align-items-center">
+          @for (item of items; track item.productId){
+            <div class="contain-product col-12 d-flex justify-content-between align-items-center mb-3">
+              <div class="col-1">
+                <p-checkbox inputId="ingredient1" [value]="item.productId" [(ngModel)]="checkboxSelected" (onChange)="selectedProduct(item.productId)"/>
+              </div>
+              <div class="col-4 d-flex align-items-center">
+                <div class="image me-2">
+                  <img src="{{ item.imageUrl }}" alt="hinhSP">
+                </div>
+                <div class="fw-bold fs-6">
+                  {{ item.productName }}
+                </div>
+              </div>
+              <div class="col-2">
+                <div class="fw-bold"> {{ item.promotionalPrice |currency:'VND': 'symbol':'1.0-0'}} </div>
+                <div class="text-decoration-line-through">{{ item.price }}</div>
+              </div>
+              <div class="col-2 d-flex align-items-center">
+                <button class="downQuantity" (click)="downQuantity(item)"><i class="bi bi-dash-lg"></i></button>
+                <input class="quantity" value="{{ item.quantity }}">
+                <button class="upQuantity" (click)="upQUantity(item)"><i class="bi bi-plus-lg"></i></button>
+              </div>
+              <div class="col-2 fw-bold text-success">
+                {{ item.totalPrice | currency:'VND':'symbol':'1.0-0' }}
+              </div>
+              <div class="col-1 text-danger delete-btn" (click)="deleteOneItem(item.productId)"><i class="bi bi-trash-fill"></i></div>
+            </div>
+            <hr>
+          } @empty {
+            <div class="w-100 h-100 text-center">
+              <img class="w-50 h-50" src="assets/cart-empty.jpg" alt="not_item">
+              <div class="fs-3 text-success fw-bold">Hiện tại bạn không có sản phẩm nào trong giỏ hàng :(</div>
+            </div>
+          }
+      </div>
+    </div>
+    <div class="col-md-12 col-lg-3">
+      <div class="header d-flex justify-content-between align-content-center mb-2">
+        <span class="fs-5 text-success">Mã khuyến mãi</span>
+        <button id="pick-code"> Chọn mã </button>
+      </div>
+      <div class="content">
+        <div class="mb-2 fw-bold text-success fs-5"> Thông tin sản phẩm </div>
+        <div class="d-flex justify-content-between align-content-center mb-2 fw-bold">
+          <span>Số sản phẩm</span>
+          <span>0</span>
+        </div>
+        <div class="d-flex justify-content-between align-content-center mb-2 fw-bold">
+          <span>Tổng tiền</span>
+          <span>0₫</span>
+        </div>
+        <div class="d-flex justify-content-between align-content-center mb-2 fw-bold">
+          <span>Giảm giá sản phẩm</span>
+          <span>0₫</span>
+        </div>
+        <div class="d-flex justify-content-between align-content-center mb-2 fw-bold">
+          <span>Voucher áp dụng</span>
+          <span>0</span>
+        </div>
+        <hr>
+        <div class="d-flex justify-content-between align-content-center mb-2 fw-bold">
+          <span>Tiết kiệm</span>
+          <span>0₫</span>
+        </div>
+        <hr>
+        <div class="d-flex justify-content-between align-content-center mb-2 fw-bold text-danger">
+          <span>Tổng số tiền</span>
+          <span>{{totalPrice | currency: 'VND': 'symbol'}}</span>
+        </div>
+        <button class="order w-100 border-0 rounded-5 p-2 mt-2" (click)="onClickOrder()">Mua hàng</button>
+      </div>
+    </div>
+  </div>
+</main>
+<p-toast></p-toast>

@@ -1,3 +1,5 @@
+@import "primeicons/primeicons.css";
+
 .header {
   color: var(--default-color);
   background-color: var(--background-color);
@@ -26,35 +28,51 @@
   background: #059652;
   color: #ffffff;
   border: none;
+  font-size: 13px;
+}
+
+.header .header-links .sign{
+  border-radius: 30px;
   width: 100px;
   height: 30px;
-  font-size: 13px;
-  border-radius: 30px;
+}
+
+.header .header-links .cart{
+  width: 30px;
+  height: 30px;
+  align-content: center;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.header-links ::ng-deep .p-button {
+  padding-block: 0 !important;
+  padding-inline: 0 !important;
 }
 
 .header .header-links button:hover{
-  background: #ffffff;
-  color: #059652;
-  border: 1px solid #059652;
+background: #ffffff;
+color: #059652;
+border: 1px solid #059652;
 }
 
 @media (max-width: 1200px) {
-  .header .logo {
-    order: 1;
-  }
+.header .logo {
+  order: 1;
+}
 
-  .header .logo h1 {
-    font-size: 24px;
-  }
+.header .logo h1 {
+  font-size: 24px;
+}
 
-  .header .header-links {
-    order: 2;
-    padding: 0 15px 0 0;
-  }
+.header .header-links {
+  order: 2;
+  padding: 0 15px 0 0;
+}
 
-  .header .navmenu {
-    order: 3;
-  }
+.header .navmenu {
+  order: 3;
+}
 }
 
 /*--------------------------------------------------------------
@@ -293,5 +311,9 @@
   .mobile-nav-active .navmenu>ul {
     display: block;
   }
+}
+
+::ng-deep .p-drawer-right{
+  width: 40rem !important;
 }
 

@@ -1,0 +1,228 @@
+<main class="main" id="main">
+  <div class="container">
+    <div class="row">
+      <div class="left-content col-5">
+        <div class="card">
+          <p-galleria [value]="images" [autoPlay]="true" [circular]="true" [responsiveOptions]="responsiveOptions" [numVisible]="5" [containerStyle]="{ 'max-width': '640px' }">
+            <ng-template #item let-item>
+              <img [src]="item.itemImageSrc" style="width: 100%; display: block" />
+            </ng-template>
+            <ng-template #thumbnail let-item>
+              <img [src]="item.thumbnailImageSrc" style="display: block" />
+            </ng-template>
+          </p-galleria>
+        </div>
+      </div>
+      <div class="right-content col-7">
+        <div class="title fs-3 fw-bold mb-2"> {{ product?.name }} </div>
+        <div class="evalue d-flex align-items-center mb-2">
+          <p-rating [ngModel]="product?.evaluate" [stars]="5" />
+          4.4 (2131 danh gia)
+        </div>
+
+        <div class="info d-flex justify-content-between align-items-center">
+          <div class="card-info">
+            <div class=""> Thể loại </div>
+            <div class="fw-bold "> {{ product?.category?.name }} </div>
+          </div>
+          <div class="card-info">
+            <div class=""> Tác giả </div>
+            <div class="fw-bold "> {{ product?.author }} </div>
+          </div>
+          <div class="card-info">
+            <div class=""> Nhà sản xuất</div>
+            <div class="fw-bold "> {{ product?.publisher }} </div>
+          </div>
+          <div class="card-info">
+            <div class=""> Ngôn ngữ</div>
+            <div class="fw-bold "> {{ product?.language }} </div>
+          </div>
+        </div>
+        <hr>
+        <div class="price mb-4 d-flex align-items-center">
+          <span class="child-title"> Giá bán </span>
+          <span class="promotional-price me-2 text-success fs-4 fw-bold"> {{ product?.price }} </span>
+          <span class="origin-price me-2 text-decoration-line-through text-danger" > {{ product?.promotionalPrice }} </span>
+          <span class="discount"> {{ product?.discount }}% </span>
+        </div>
+        <div class="box-quantity mb-4 d-flex align-items-center">
+          <span class="child-title"> Số lượng </span>
+          <button class="downQuantity" (click)="downQuantity()"><i class="bi bi-dash-lg"></i></button>
+          <input class="quantity" [value]="quantity" />
+          <button class="upQuantity" (click)="upQuantity()"><i class="bi bi-plus-lg"></i></button>
+        </div>
+        <div class="mb-4 d-flex align-items-center">
+          <span class="child-title"> Ưu đãi </span>
+          <div> Hien chua co uu dai nao duoc cap dung cho san pham nay</div>
+        </div>
+        <div class="button d-flex align-items-center mb-4">
+          <button class="buy-now-btn me-2">Mua ngay</button>
+          <button class="add-in-cart-btn me-2" (click)="addIntoCart()">Thêm sán phẩm vào giỏ</button>
+          <div><i class="bi bi-chat-dots"></i></div>
+        </div>
+        <div class="card">
+          <p-tabs value="0" scrollable>
+            <p-tablist>
+              <ng-template #previcon>
+                <i class="pi pi-minus"></i>
+              </ng-template>
+              <p-tab value="0">
+                <span class="font-bold whitespace-nowrap">Mô tả sản phẩm</span>
+              </p-tab>
+              <p-tab value="1">
+                <span class="font-bold whitespace-nowrap">Đánh giá</span>
+              </p-tab>
+              <p-tab value="2">
+                <span class="font-bold whitespace-nowrap">Bình luận</span>
+                <p-badge value="2" />
+              </p-tab>
+              <ng-template #nexticon>
+                <i class="pi pi-plus"></i>
+              </ng-template>
+            </p-tablist>
+            <p-tabpanels>
+              <p-tabpanel value="0">
+                <p class="m-0">
+                  {{ product?.description }}
+                </p>
+              </p-tabpanel>
+              <p-tabpanel value="1">
+                <div class="row d-flex align-items-center">
+                  <div class="col-4 rating-average">
+                    4,5
+                  </div>
+                  <div class="col-8 rating-chart">
+                    <div class="side">
+                      <div class="text-warning">5★</div>
+                    </div>
+                    <div class="middle">
+                      <div class="bar-container">
+                        <div class="bar-5"></div>
+                      </div>
+                    </div>
+                    <div class="side right">
+                      <div>150</div>
+                    </div>
+                    <div class="side">
+                      <div class="text-warning">4★</div>
+                    </div>
+                    <div class="middle">
+                      <div class="bar-container">
+                        <div class="bar-4"></div>
+                      </div>
+                    </div>
+                    <div class="side right">
+                      <div>63</div>
+                    </div>
+                    <div class="side">
+                      <div class="text-warning">3★</div>
+                    </div>
+                    <div class="middle">
+                      <div class="bar-container">
+                        <div class="bar-3"></div>
+                      </div>
+                    </div>
+                    <div class="side right">
+                      <div>15</div>
+                    </div>
+                    <div class="side">
+                      <div class="text-warning">2★</div>
+                    </div>
+                    <div class="middle">
+                      <div class="bar-container">
+                        <div class="bar-2"></div>
+                      </div>
+                    </div>
+                    <div class="side right">
+                      <div>6</div>
+                    </div>
+                    <div class="side">
+                      <div class="text-warning">1★</div>
+                    </div>
+                    <div class="middle">
+                      <div class="bar-container">
+                        <div class="bar-1"></div>
+                      </div>
+                    </div>
+                    <div class="side right">
+                      <div>20</div>
+                    </div>
+                  </div>
+                </div>
+              </p-tabpanel>
+              <p-tabpanel value="2">
+                <section >
+                  <div class="comment">
+                    <div class="d-flex align-items-center">
+                      <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/asiyajavayant.png" class="mr-2" size="large" shape="circle" />
+                      <div>
+                        <div class="fw-bold"><a href="" class="text-dark me-2">Georgia Reader</a> <a href="#" class="reply"><i class="bi bi-reply-fill"></i> Reply</a></div>
+                        <div>10s truoc</div>
+                      </div>
+                    </div>
+                    <div class="content">
+                      Avatar does not include any roles and attributes by default. Any attribute is passed to the root element so you may add a role like
+                    </div>
+                  </div>
+
+                  <div class="comment">
+                    <div class="d-flex align-items-center">
+                      <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/asiyajavayant.png" class="mr-2" size="large" shape="circle" />
+                      <div>
+                        <div class="fw-bold"><a href="" class="text-dark me-2">Georgia Reader</a> <a href="#" class="reply"><i class="bi bi-reply-fill"></i> Reply</a></div>
+                        <div>10s truoc</div>
+                      </div>
+                    </div>
+                    <div class="content">
+                      Avatar does not include any roles and attributes by default. Any attribute is passed to the root element so you may add a role like
+                    </div>
+                  </div>
+
+                  <div class="comment">
+                    <div class="d-flex align-items-center">
+                      <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/asiyajavayant.png" class="mr-2" size="large" shape="circle" />
+                      <div>
+                        <div class="fw-bold"><a href="" class="text-dark me-2">Georgia Reader</a> <a href="#" class="reply"><i class="bi bi-reply-fill"></i> Reply</a></div>
+                        <div>10s truoc</div>
+                      </div>
+                    </div>
+                    <div class="content">
+                      Avatar does not include any roles and attributes by default. Any attribute is passed to the root element so you may add a role like
+                    </div>
+                  </div>
+
+                  <div class="comment-form">
+                    <input placeholder="Nhập bình luận ở đây">
+                    <button>Gui</button>
+                  </div>
+                </section>
+              </p-tabpanel>
+            </p-tabpanels>
+          </p-tabs>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <p-carousel [value]="products" [numVisible]="3" [numScroll]="3" [circular]="true" [responsiveOptions]="responsiveOptions" autoplayInterval="3000">
+        <ng-template let-product #item>
+          <div class="border border-surface-200 dark:border-surface-700 rounded m-2 p-4">
+            <div class="mb-4">
+              <div class="relative mx-auto">
+                <img src="https://primefaces.org/cdn/primeng/images/demo/product/{{ product.image }}" [alt]="product.name" class="w-full rounded-border" />
+                <p-tag [value]="product.discount" severity="success" class="absolute" styleClass="dark:!bg-surface-900" [ngStyle]="{ 'left.px': 5, 'top.px': 5 }" />
+              </div>
+            </div>
+            <div class="mb-4 font-medium">{{ product.name }}</div>
+            <div class="flex justify-between items-center">
+              <div class="mt-0 font-semibold text-xl">{{ '$' + product.price }}</div>
+              <span>
+                        <p-button icon="pi pi-heart" severity="secondary" [outlined]="true" />
+                        <p-button icon="pi pi-shopping-cart" styleClass="ml-2" />
+                    </span>
+            </div>
+          </div>
+        </ng-template>
+      </p-carousel>
+    </div>
+  </div>
+</main>

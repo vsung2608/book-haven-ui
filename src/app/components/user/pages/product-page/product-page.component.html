@@ -1,23 +1,12 @@
+<p-toast/>
 <section id="products" class="section">
   <div class="container">
     <div class="row">
       <!-- Sidebar -->
       <div class="col-12">
-        <div class="row align-items-center d-flex justify-content-between mb-3">
-          <div class="col-md-6 d-flex">
+        <div class="search-box row align-items-center d-flex justify-content-between mb-3">
             <input id="searchField" type="text" placeholder="Nhập thông tin sản phẩm...">
             <button id="searchBtn">Tìm kiếm</button>
-          </div>
-
-          <div class="col-md-3">
-            <select id="selectQuantity">
-              <option value="1">1 sản phẩm</option>
-              <option value="2">2 sản phẩm</option>
-              <option value="3">3 sản phẩm</option>
-              <option value="4">4 sản phẩm</option>
-              <option value="5">5 sản phẩm</option>
-            </select>
-          </div>
         </div>
       </div>
       <!-- Main Content -->
@@ -98,31 +87,81 @@
                [infiniteScrollThrottle]="50"
                (scrolled)="loadMoreProducts()"
                [scrollWindow]="false">
-
-          </div>
-          <div class="col-md-3 col-sm-4 mb-3 pro-d">
-            <div class="product-grid">
-              <div class="product-image">
-                <a href="#" class="image">
-                  <img src="https://bizweb.dktcdn.net/100/363/455/products/cuon-sach-hoang-da-01.jpg?v=1740449676720" class="img-fluid zoom" alt="book-1">
-                </a>
-                <span  class="product-discount-label">10%</span>
-                <ul class="product-links">
-                  <li><a href="#"><i class="bi bi-cart-plus"></i></a></li>
-                  <li><a href="#"><i class="bi bi-heart"></i></a></li>
-                  <li><a href="#"><i class="bi bi-shuffle"></i></a></li>
-                </ul>
-                <a href="#" class="add-to-cart">Xem
-                  chi tiết</a>
-              </div>
-              <div class="product-content">
-                <h3 class="title"><a href="#"> San pham 1</a></h3>
-                <div class="price"> 100.000₫</div>
-                <input type="hidden" class="dis-price"/>
-                <div class="text-warning">★★★★☆</div>
-              </div>
+            <div class="row">
+              @for (item of products; track item.id){
+                <div class="col-md-3 col-sm-4 mb-3 pro-d">
+                  <div class="product-grid">
+                    <div class="product-image">
+                      <a [routerLink]="['/products', item.id ]" class="image">
+                        <img src="{{ item.image }}" class="img-fluid zoom" alt="book-1">
+                      </a>
+                      <span  class="product-discount-label">10%</span>
+                      <p-confirmPopup #cp>
+                        <ng-template pTemplate="headless" let-message let-test>
+                          <div class="border-round p-3">
+                            <span>{{ message.message }}</span>
+                            <div class="flex align-items-center gap-2 mt-3">
+                              <p-button (onClick)="accept(item.id)" label="Xác nhận" size="small" class="me-2"/>
+                              <p-button (onClick)="reject()" label="Hủy" [outlined]="true" size="small" />
+                            </div>
+                          </div>
+                        </ng-template>
+                      </p-confirmPopup>
+                      <ul class="product-links">
+                        <li><a (click)="confirm($event); setCurrentId(item.id)"><i class="bi bi-cart-plus"></i></a></li>
+                        <li><a href="#"><i class="bi bi-heart"></i></a></li>
+                        <li><a href="#"><i class="bi bi-shuffle"></i></a></li>
+                      </ul>
+                      <a [routerLink]="['/products', item.id]" class="add-to-cart">Xem chi tiết</a>
+                    </div>
+                    <div class="product-content">
+                      <h3 class="title"><a href="#"> {{ item.name }} </a></h3>
+                      <div class="price"> {{ item.price | currency:'VND':'symbol':'1.0-0' }} </div>
+                      <input type="hidden" class="dis-price"/>
+                      <p-rating [ngModel]="item.evaluate" [stars]="5" />
+                    </div>
+                  </div>
+                </div>
+              } @empty {
+              }
             </div>
           </div>
+          <div class="card">
+            <p-dataview #dv [value]="products" [layout]="layout">
+              <ng-template #grid let-items>
+                <div class="grid grid-cols-12 gap-4">
+                  <div
+                    *ngFor="let i of counterArray(6); let first = first"
+                    class="col-12 col-sm-6 col-xl-4 p-2 d-flex"
+                  >
+                    <div
+                      class="p-6 border border-surface-200 dark:border-surface-700 bg-surface-0 dark:bg-surface-900 rounded"
+                    >
+                      <div class="d-flex flex-wrap align-items-center justify-content-between gap-2">
+                        <p-skeleton width="6rem" height="2rem" />
+                        <p-skeleton width="3rem" height="1rem" />
+                      </div>
+                      <div class="d-flex flex-col align-items-center gap-4 py-8">
+                        <p-skeleton height="10rem" class="w-3/4" styleClass="w-3/4" />
+                        <p-skeleton width="8rem" height="2rem" />
+                        <p-skeleton width="6rem" height="1rem" />
+                      </div>
+                      <div class="d-flex align-items-center justify-between">
+                        <p-skeleton width="4rem" height="2rem" />
+                        <p-skeleton
+                          width="6rem"
+                          height="1rem"
+                          shape="circle"
+                          size="3rem"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+            </p-dataview>
+          </div>
+
         </div>
       </div>
     </div>
