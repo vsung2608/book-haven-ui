@@ -1,3 +1,5 @@
+@import "primeicons/primeicons.css";
+
 /*--------------------------------------------------------------
 # Sidebar
 --------------------------------------------------------------*/
@@ -13,6 +15,8 @@
   scrollbar-width: thin;
   scrollbar-color: #aab7cf transparent;
   background-color: #ffffff;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  color: #496560;
 }
 
 @media (max-width: 1199px) {
@@ -73,13 +77,13 @@
 .sidebar-nav .nav-item {
   margin-bottom: 5px;
   background: #ffffff;
-  color: #2c2d2f;
+  color: #496560;
 }
 
 .sidebar-nav .nav-heading {
   font-size: 11px;
   text-transform: uppercase;
-  color: #2c2d2f;
+  color: #496560;
   font-weight: bold;
   margin: 10px 0 5px 15px;
 }
@@ -87,27 +91,27 @@
 .sidebar-nav .nav-link {
   display: flex;
   align-items: center;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
-  color: #2c2d2f;
+  color: #496560;
   transition: 0.3;
   background: #ffffff;
-  padding: 10px 15px;
+  padding: 5px 15px 5px 30px;
   border-radius: 4px;
 }
 
 .sidebar-nav .nav-link i {
-  font-size: 16px;
+  font-size: 14px;
   margin-right: 10px;
-  color: #2c2d2f;
+  color: #3e3e41;
 }
 
 .sidebar-nav .nav-link.collapsed i {
-  color: #2c2d2f;
+  color: #496560;
 }
 
 .sidebar-nav .nav-link:hover {
-  background: #464c52;
+  background: #f6f9ff;
 }
 
 .sidebar-nav .nav-link .bi-chevron-down {
@@ -130,9 +134,9 @@
   align-items: center;
   font-size: 14px;
   font-weight: 600;
-  color: #2c2d2f;
+  color: #496560;
   transition: 0.3;
-  padding: 10px 0 10px 40px;
+  padding: 10px 0 5px 40px;
   transition: 0.3s;
 }
 
@@ -145,7 +149,7 @@
 
 .sidebar-nav .nav-content a:hover,
 .sidebar-nav .nav-content a.active {
-  background: #ffffff;;
+  background: #f6f9ff;
 }
 
 .sidebar-nav .nav-content a.active i {

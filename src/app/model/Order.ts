@@ -1,7 +1,7 @@
 export interface PlaceOrderRequest{
   reference: string,
   totalPrice: number,
-  customerId: number,
+  customerId: string,
   status: Status,
   paymentMethod: PaymentMethod,
   paymentStatus: PaymentStatus,

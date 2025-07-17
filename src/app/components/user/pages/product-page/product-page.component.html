@@ -82,11 +82,10 @@
             </div>
           </div>
           <div class="product-container"
-               infiniteScroll
-               [infiniteScrollDistance]="2"
-               [infiniteScrollThrottle]="50"
-               (scrolled)="loadMoreProducts()"
-               [scrollWindow]="false">
+               infinite-scroll
+               [infiniteScrollDistance]="1"
+               [infiniteScrollThrottle]="300"
+               (scrolled)="loadMoreProducts()">
             <div class="row">
               @for (item of products; track item.id){
                 <div class="col-md-3 col-sm-4 mb-3 pro-d">
@@ -114,7 +113,7 @@
                       </ul>
                       <a [routerLink]="['/products', item.id]" class="add-to-cart">Xem chi tiết</a>
                     </div>
-                    <div class="product-content">
+                    <div class="product-content d-flex flex-column align-items-center">
                       <h3 class="title"><a href="#"> {{ item.name }} </a></h3>
                       <div class="price"> {{ item.price | currency:'VND':'symbol':'1.0-0' }} </div>
                       <input type="hidden" class="dis-price"/>
@@ -126,42 +125,41 @@
               }
             </div>
           </div>
-          <div class="card">
-            <p-dataview #dv [value]="products" [layout]="layout">
-              <ng-template #grid let-items>
-                <div class="grid grid-cols-12 gap-4">
-                  <div
-                    *ngFor="let i of counterArray(6); let first = first"
-                    class="col-12 col-sm-6 col-xl-4 p-2 d-flex"
-                  >
+          @if(hasMore){
+            <div class="card border-0">
+              <p-dataview #dv [value]="products" [layout]="layout">
+                <ng-template #grid let-items>
+                  <div class="grid-cols-12 row">
                     <div
-                      class="p-6 border border-surface-200 dark:border-surface-700 bg-surface-0 dark:bg-surface-900 rounded"
+                      *ngFor="let i of counterArray(6); let first = first"
+                      class="col-sm-4 col-xl-3 d-flex pb-4"
                     >
-                      <div class="d-flex flex-wrap align-items-center justify-content-between gap-2">
-                        <p-skeleton width="6rem" height="2rem" />
-                        <p-skeleton width="3rem" height="1rem" />
-                      </div>
-                      <div class="d-flex flex-col align-items-center gap-4 py-8">
-                        <p-skeleton height="10rem" class="w-3/4" styleClass="w-3/4" />
-                        <p-skeleton width="8rem" height="2rem" />
-                        <p-skeleton width="6rem" height="1rem" />
-                      </div>
-                      <div class="d-flex align-items-center justify-between">
-                        <p-skeleton width="4rem" height="2rem" />
-                        <p-skeleton
-                          width="6rem"
-                          height="1rem"
-                          shape="circle"
-                          size="3rem"
-                        />
+                      <div class="p-6 border border-surface-200 dark:border-surface-500 bg-surface-0 dark:bg-surface-700 rounded">
+                        <div class="d-flex flex-wrap align-items-center justify-content-between gap-2">
+                          <p-skeleton width="4rem" height="2rem" />
+                          <p-skeleton width="2rem" height="1rem" />
+                        </div>
+                        <div class="d-flex flex-col align-items-center gap-4 py-8">
+                          <p-skeleton height="10rem" class="w-3/4" styleClass="w-3/4" />
+                          <p-skeleton width="8rem" height="2rem" />
+                          <p-skeleton width="6rem" height="1rem" />
+                        </div>
+                        <div class="d-flex align-items-center justify-between">
+                          <p-skeleton width="4rem" height="2rem" />
+                          <p-skeleton
+                            width="6rem"
+                            height="1rem"
+                            shape="circle"
+                            size="3rem"
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </ng-template>
-            </p-dataview>
-          </div>
-
+                </ng-template>
+              </p-dataview>
+            </div>
+          }
         </div>
       </div>
     </div>

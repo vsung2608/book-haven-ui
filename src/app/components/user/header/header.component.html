@@ -39,16 +39,16 @@
       } @else {
         <div class="d-flex align-items-center">
           <p-overlay-badge value="5" severity="success" badgeSize="small">
-            <p-button [rounded]="true" [outlined]="true" severity="success" (onClick)="navigateToCartPage()">
+            <p-button [rounded]="true" severity="success" (onClick)="navigateToCartPage()">
               <i class="pi pi-shopping-bag" style="font-size: 1.2rem; padding: 5px;"></i>
             </p-button>
           </p-overlay-badge>
           <p-overlay-badge value="5" severity="danger" badgeSize="small">
-            <p-button [rounded]="true" outlined severity="success" class="ms-3" (onClick)="visible = true;">
+            <p-button [rounded]="true" severity="success" class="ms-3" (onClick)="visible = true;">
               <i class="pi pi-bell" style="font-size: 1.2rem; padding: 5px;"></i>
             </p-button>
           </p-overlay-badge>
-          <p-splitbutton label="Save" [model]="items" rounded outlined class="p-0 ms-3">
+          <p-splitbutton label="Save" [model]="items" rounded class="p-0 ms-3">
             <ng-template #content class="p-0">
             <span class="flex items-center font-bold" style="width: 30px; height: 30px;">
                 <img alt="logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzwHFskk5Q5AH4B8g_ph6JZUrbotBovTkl8g&s"

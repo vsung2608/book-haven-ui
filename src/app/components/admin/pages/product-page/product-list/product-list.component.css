@@ -1,0 +1,58 @@
+@import "primeicons/primeicons.css";
+
+.main{
+  position: fixed;
+  top: 60px;
+  left: 250px;
+  bottom: 0;
+  width: calc(100% - 250px);
+  z-index: 996;
+  transition: all 0.3s;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #aab7cf transparent;
+  background-color: #F1F5F9;
+  border-top: 1px solid #e2e8f0;
+  overflow: auto;
+  height: calc(100vh - 5rem);
+  padding: 0 0 2rem 2rem;
+  border-top-left-radius: 30px;
+  box-shadow: inset 0 3px 4px #0000001a;
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+.main .products-section{
+  padding: 20px;
+  background: #FFFFFF;
+  border-radius: 10px;
+  font-size: 13px;
+  box-shadow: 0 3px 4px #0000001a, 0 24px 36px #0000000a;
+}
+
+.main .products-section .search-box{
+  padding: 7px 7px 7px 30px;
+  width: 200px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  outline: none;
+  box-shadow: 0 0 #0000,0 0 #0000,0 1px 2px 0 rgba(18,18,23,0.05);
+}
+
+.main .products-section .search-box:focus{
+  border: 1px solid #0bc26a;
+}
+
+.main .products-section .dialog input, textarea{
+  padding: 7px 7px 7px 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  outline: none;
+  box-shadow: 0 0 #0000,0 0 #0000,0 1px 2px 0 rgba(18,18,23,0.05);
+}
+
+.main .products-section .dialog input:focus, textarea:focus{
+  border: 1px solid #0bc26a;
+}
+
+
+

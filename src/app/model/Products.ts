@@ -3,7 +3,7 @@ export interface Page{
   totalPages?: number;
   pageSize: number;
   totalElements?: number;
-  data: Array<Products>;
+  data: Array<ProductLimitedFields>;
 }
 
 export interface Products{
@@ -21,6 +21,33 @@ export interface Products{
   category?: Category;
   evaluate: number;
   discount: number;
+  categoryName: string;
+  relatedProducts: Array<ProductLimitedFields>;
+}
+
+export interface ProductRequest{
+  name: string
+  description: string
+  price: number
+  categoryId: number
+  quantity: number
+  language: string
+  publishDate: string
+  author: string
+  publisher: string
+  evaluate: string
+  discount: number
+}
+
+export interface ProductLimitedFields{
+  id: number;
+  name?: string;
+  discount?: number;
+  evaluate?: number;
+  image?: string;
+  price?: number;
+  categoryName?: string;
+  quantity?: number;
 }
 
 export interface Category{

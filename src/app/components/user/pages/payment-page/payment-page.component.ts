@@ -13,21 +13,29 @@ import {InputTextModule} from 'primeng/inputtext';
 import {ButtonModule} from 'primeng/button';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {PaymentMethod} from '../../../../model/Order';
+import {DialogModule} from 'primeng/dialog';
 
 @Component({
   selector: 'app-payment-page',
   imports: [FloatLabelModule, InputMaskModule, SelectModule, ToastModule, FormsModule, InputTextModule,
-            ReactiveFormsModule, ConfirmDialogModule, ButtonModule],
+            ConfirmDialogModule, ButtonModule, DialogModule],
   templateUrl: './payment-page.component.html',
   styleUrl: './payment-page.component.css'
 })
 export class PaymentPageComponent implements OnInit{
-  form!: FormGroup
   cities: City[] | undefined;
+
   cityVal: City | undefined;
   disticVal: Distict | undefined;
   villageVal: Village | undefined;
+  fullnameVal: string =  "Nguyen Van Sung";
+  phoneVal: string = "0964034162";
+  emailVal: string = "helios@gmail.com";
+  detailAddressVal: string =  "Ngo 03, Phuong Canh";
+  noteVal: string = "No content";
+  qrCodeVisiable: boolean = false;
   selectedMethod: PaymentMethod = PaymentMethod.COD;
+
   products: Item[] = []
   totalPrice: number = 0;
   shoppingFee: number = 0;
@@ -36,13 +44,6 @@ export class PaymentPageComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.form = this.formBuilder.group({
-      fullName: ['', [Validators.required, Validators.minLength(5)]],
-      phoneNumber: ['', [Validators.required, Validators.pattern(/^(0|\+84)[0-9]{9}$/)]],
-      email: ['', [Validators.required, Validators.email]],
-      detailAddress: [''],
-      note: ['']
-    })
     this.cities = [
       { name: 'New York', code: 'NY' },
       { name: 'Rome', code: 'RM' },
@@ -58,13 +59,13 @@ export class PaymentPageComponent implements OnInit{
   }
 
   order(event: Event){
-    if(this.form.invalid){
-      let message = 'Vui lòng điền đầy đủ thông tin nhận hàng!'
-      if(this.form.get('fullName')?.invalid) message = 'Tên phải ít nhất 5 ký tự. Vui lòng kiểm tra lại!';
-      if(this.form.get('phoneNumber')?.invalid) message = 'Số điện thoại không hợp lệ. Vui lòng kiểm tra lại!';
-      if(this.form.get('fullName')?.invalid) message = 'Email không đúng định dạng. Vui lòng kiểm tra lại!';
-      this.messageService.add({severity: 'warn', summary: 'Cảnh báo', detail: message})
-    }else{
+    let message = 'Vui lòng điền đầy đủ thông tin nhận hàng!';
+    let type = "warn";
+
+    if(this.fullnameVal.trim().length <= 5) message = 'Tên phải ít nhất 5 ký tự. Vui lòng kiểm tra lại!';
+    else if(!this.isValidPhoneNumber(this.phoneVal)) message = 'Số điện thoại không hợp lệ. Vui lòng kiểm tra lại!';
+    else if(!this.isValidEmail(this.emailVal)) message = 'Email không đúng định dạng. Vui lòng kiểm tra lại!';
+    else{
       this.confirmationService.confirm({
         target: event.target as EventTarget,
         message: 'Bạn có chắc muốn đặt mua những sản phẩm này không?',
@@ -81,14 +82,31 @@ export class PaymentPageComponent implements OnInit{
           label: 'Xác nhận',
         },
         accept: () => {
-          let shippingAddress = `${this.form.get('detailAddress')} - ${this.villageVal} - ${this.disticVal} - ${this.cityVal}`
-          this.orderService.placeOrder(this.selectedMethod, this.totalPrice, this.form.get('note')?.value, this.shoppingFee, shippingAddress)
-          this.messageService.add({ severity: 'success', summary: 'Thành công', detail: 'Cảm ơn quý khách đã tin tưởng và mua hàng.' });
+          if(this.selectedMethod === PaymentMethod.QR){
+            this.qrCodeVisiable = true;
+          }else {
+            let shippingAddress = `${this.detailAddressVal} - ${this.villageVal} - ${this.disticVal} - ${this.cityVal}`;
+            this.orderService.placeOrder(this.selectedMethod, this.totalPrice, this.noteVal, this.shoppingFee, shippingAddress);
+            message = 'Cảm ơn quý khách đã tin tưởng và mua hàng.';
+            type = "success"
+            this.messageService.add({severity: type, summary: 'Thông báo', detail: message});
+          }
         },
         reject: () => {
         },
       });
     }
+    this.messageService.add({ severity: type, summary: 'Thông báo', detail: message });
+  }
+
+  isValidPhoneNumber(phone: string): boolean {
+    const vietnamPhoneRegex = /^(0|\+84)[3|5|7|8|9][0-9]{8}$/;
+    return vietnamPhoneRegex.test(phone);
+  }
+
+  isValidEmail(email: string): boolean {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
   }
 
   protected readonly PaymentMethod = PaymentMethod;

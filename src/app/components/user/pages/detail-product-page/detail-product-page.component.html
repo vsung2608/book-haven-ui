@@ -56,8 +56,8 @@
           <div> Hien chua co uu dai nao duoc cap dung cho san pham nay</div>
         </div>
         <div class="button d-flex align-items-center mb-4">
-          <button class="buy-now-btn me-2">Mua ngay</button>
-          <button class="add-in-cart-btn me-2" (click)="addIntoCart()">Thêm sán phẩm vào giỏ</button>
+          <button class="buy-now-btn me-2"><i class="bi bi-coin"></i> Mua ngay</button>
+          <button class="add-in-cart-btn me-2" (click)="addIntoCart()"><i class="pi pi-cart-plus"></i> Thêm sán phẩm vào giỏ</button>
           <div><i class="bi bi-chat-dots"></i></div>
         </div>
         <div class="card">
@@ -151,74 +151,94 @@
                 </div>
               </p-tabpanel>
               <p-tabpanel value="2">
-                <section >
-                  <div class="comment">
-                    <div class="d-flex align-items-center">
-                      <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/asiyajavayant.png" class="mr-2" size="large" shape="circle" />
-                      <div>
-                        <div class="fw-bold"><a href="" class="text-dark me-2">Georgia Reader</a> <a href="#" class="reply"><i class="bi bi-reply-fill"></i> Reply</a></div>
-                        <div>10s truoc</div>
+                <section class="comment-section" *ngIf="comments$ | async as comments">
+                  @for (comment of comments; track comment.id){
+                    <div class="comment mb-2 mb-3" *ngIf="replies$ | async as replies">
+                      <div class="avatar-line-vertical" *ngIf="comment.replyCount > 0"></div>
+                      <div class="d-flex mb-2">
+                        <div class="avatar-wrapper position-relative me-2">
+                          <div class="avatar">
+                            <img [src]="comment.userAvatarUrl" alt="avatar" class="rounded-circle" width="40" height="40" />
+                          </div>
+                          <div class="avatar-line"></div>
+                        </div>
+                        <div >
+                          <div class="fw-bold"><a class="text-dark me-2"> {{comment.userName}} </a> <a class="reply" (click)="reply(comment.id, comment.userName)"><i class="bi bi-reply-fill"></i> Trả lời </a></div>
+                          <div class="content">
+                            {{comment.content}}
+                          </div>
+                          <div [style]="'font-size: 12px'">
+                            <span class="fw-bold me-4"> {{comment.createdAt}} </span>
+                            <span class="fw-bold">11 like</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="fw-bold ms-5 mb-2" (click)="toggleReplies(comment.id)" [style]="'cursor: pointer'" *ngIf="comment.replyCount > 0">
+                        {{ expandedComments[comment.id] ? 'Ẩn bớt bình luận' : 'Xem thêm ' + comment.replyCount + ' bình luận' }}
+                      </div>
+                      <div *ngIf="expandedComments[comment.id]">
+                        @for (reply of replies; track reply.id){
+                          @if(reply.parentCommentId === comment.id){
+                            <div class="child-comment ms-5 mb-2">
+                              <div class="dot-on-line"></div>
+                              <div class="d-flex mb-2">
+                                <div class="avatar-wrapper position-relative me-2">
+                                  <div class="avatar">
+                                    <span class="circle-dot"></span>
+                                    <img [src]="reply.userAvatarUrl" alt="avatar" class="rounded-circle" width="40" height="40" />
+                                  </div>
+                                  <div class="avatar-line"></div>
+                                </div>
+                                <div >
+                                  <div class="fw-bold"><a href="" class="text-dark me-2">{{reply.userName}}</a> <a href="#" class="reply"><i class="bi bi-reply-fill"></i> Reply</a></div>
+                                  <div class="content">{{reply.content}}</div>
+                                  <div [style]="'font-size: 12px'">
+                                    <span class="fw-bold me-4">{{reply.createdAt}}</span>
+                                    <span class="fw-bold me-4">11 like</span>
+                                    @if(comment.userId === '1'){
+                                      <span class="fw-bold me-4">Xóa bình luận</span>
+                                      <span class="fw-bold me-4">Sửa bình luận</span>
+                                    }@else{
+                                      <span class="fw-bold me-4">Báo cáo bình luận</span>
+                                    }
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          }
+                        }
                       </div>
                     </div>
-                    <div class="content">
-                      Avatar does not include any roles and attributes by default. Any attribute is passed to the root element so you may add a role like
-                    </div>
-                  </div>
-
-                  <div class="comment">
-                    <div class="d-flex align-items-center">
-                      <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/asiyajavayant.png" class="mr-2" size="large" shape="circle" />
-                      <div>
-                        <div class="fw-bold"><a href="" class="text-dark me-2">Georgia Reader</a> <a href="#" class="reply"><i class="bi bi-reply-fill"></i> Reply</a></div>
-                        <div>10s truoc</div>
-                      </div>
-                    </div>
-                    <div class="content">
-                      Avatar does not include any roles and attributes by default. Any attribute is passed to the root element so you may add a role like
-                    </div>
-                  </div>
-
-                  <div class="comment">
-                    <div class="d-flex align-items-center">
-                      <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/asiyajavayant.png" class="mr-2" size="large" shape="circle" />
-                      <div>
-                        <div class="fw-bold"><a href="" class="text-dark me-2">Georgia Reader</a> <a href="#" class="reply"><i class="bi bi-reply-fill"></i> Reply</a></div>
-                        <div>10s truoc</div>
-                      </div>
-                    </div>
-                    <div class="content">
-                      Avatar does not include any roles and attributes by default. Any attribute is passed to the root element so you may add a role like
-                    </div>
-                  </div>
-
-                  <div class="comment-form">
-                    <input placeholder="Nhập bình luận ở đây">
-                    <button>Gui</button>
-                  </div>
+                  }
                 </section>
+                <div class="comment-form">
+                  <input #replyInput placeholder="Nhập bình luận ở đây" [(ngModel)]="commentContent" (keydown)="handleKeyDown($event)">
+                  <button type="button" (click)="postComment()">Gui</button>
+                </div>
               </p-tabpanel>
             </p-tabpanels>
           </p-tabs>
         </div>
       </div>
     </div>
-    <div class="card">
-      <p-carousel [value]="products" [numVisible]="3" [numScroll]="3" [circular]="true" [responsiveOptions]="responsiveOptions" autoplayInterval="3000">
-        <ng-template let-product #item>
-          <div class="border border-surface-200 dark:border-surface-700 rounded m-2 p-4">
-            <div class="mb-4">
-              <div class="relative mx-auto">
-                <img src="https://primefaces.org/cdn/primeng/images/demo/product/{{ product.image }}" [alt]="product.name" class="w-full rounded-border" />
-                <p-tag [value]="product.discount" severity="success" class="absolute" styleClass="dark:!bg-surface-900" [ngStyle]="{ 'left.px': 5, 'top.px': 5 }" />
-              </div>
+
+    <div class="card mt-5">
+      <div class="fs-4 fw-bold m">Có thể bạn sẽ thích</div>
+      <p-carousel [value]="product?.relatedProducts || []" [numVisible]="3" [numScroll]="1" [circular]="true" [responsiveOptions]="responsiveOptions" autoplayInterval="3000">
+        <ng-template let-item #item>
+          <div class="related-product d-flex row">
+            <div class="image col-4">
+              <img [src]="item.image" [alt]="'hinh' + item.image">
             </div>
-            <div class="mb-4 font-medium">{{ product.name }}</div>
-            <div class="flex justify-between items-center">
-              <div class="mt-0 font-semibold text-xl">{{ '$' + product.price }}</div>
-              <span>
-                        <p-button icon="pi pi-heart" severity="secondary" [outlined]="true" />
-                        <p-button icon="pi pi-shopping-cart" styleClass="ml-2" />
-                    </span>
+            <div class="info col-8">
+                <div class="fs-5 fw-bold">{{ item.name }}</div>
+                <div><p-rating [ngModel]="item.evaluate" [stars]="5" /></div>
+                <div class="pt-2 pb-2 text-danger"> {{ item.price }}</div>
+                <div class="button">
+                  <button type="button" class="add-into-cart"><i class="pi pi-cart-plus"></i> Thêm sản phẩm vào giỏ</button>
+                  <button type="button" ><i class="pi pi-info-circle"></i> Xem thông tin chi tiết </button>
+                </div>
             </div>
           </div>
         </ng-template>

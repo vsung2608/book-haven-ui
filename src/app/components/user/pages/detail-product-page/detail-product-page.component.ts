@@ -1,4 +1,4 @@
-import {Component, model, NgModule, OnInit} from '@angular/core';
+import {Component, ElementRef, model, NgModule, OnInit, ViewChild} from '@angular/core';
 import {GalleriaModule} from 'primeng/galleria';
 import {Category, ImageItem, Products} from '../../../../model/Products';
 import {TabsModule} from 'primeng/tabs';
@@ -12,28 +12,48 @@ import {CartService} from '../../../../services/cart/cart.service';
 import {TagModule} from 'primeng/tag';
 import {RatingModule} from 'primeng/rating';
 import {FormsModule} from '@angular/forms';
+import {ScrollerModule} from 'primeng/scroller';
+import {Comment} from '@angular/compiler';
+import {CommentService} from '../../../../services/interaction/comment.service';
+import {Observable} from 'rxjs';
+import {Item} from '../../../../model/Cart';
+import {CommentResponse} from '../../../../model/Interaction';
 
 @Component({
   selector: 'app-detail-product-page',
-  imports: [GalleriaModule, TabsModule, AvatarModule, BadgeModule, CarouselModule, ButtonModule, TagModule, RatingModule, FormsModule],
+  imports: [GalleriaModule, TabsModule, AvatarModule, BadgeModule, CarouselModule, ButtonModule, TagModule, RatingModule, FormsModule,
+            ScrollerModule],
   templateUrl: './detail-product-page.component.html',
   styleUrl: './detail-product-page.component.css'
 })
 export class DetailProductPageComponent implements OnInit{
+  @ViewChild('replyInput') replyInput!: ElementRef;
   images: Array<ImageItem> = new Array<ImageItem>()
   products: Array<Products> = new Array<Products>()
   responsiveOptions: any[] | undefined;
   product: Products | undefined;
   id = 0;
   quantity: number = 1;
+  expandedComments: { [commentId: string]: boolean } = {};
+  loadedReplyComment: { [commentId: string]: boolean } = {};
 
-  constructor(private productService: ProductService, private cartService: CartService, private route: ActivatedRoute) {}
+  comments$: Observable<Array<CommentResponse>> | undefined;
+  replies$: Observable<Array<CommentResponse>> | undefined;
+  commentContent: string = ''
+  parentCommentId: string = ''
+
+  constructor(private productService: ProductService, private cartService: CartService, private route: ActivatedRoute,
+              private commentService:CommentService) {}
 
   ngOnInit() {
     this.id = Number(this.route.snapshot.paramMap.get('id'));
     this.productService.getDetailProductById(this.id).pipe()
       .subscribe(product => this.product = product)
     this.getImages().then((images) => this.images = (images));
+
+    this.commentService.loadComments(this.id)
+    this.comments$ = this.commentService.comments$
+    this.replies$ = this.commentService.replies$
     this.responsiveOptions = [
       {
         breakpoint: '1400px',
@@ -56,6 +76,24 @@ export class DetailProductPageComponent implements OnInit{
         numScroll: 1
       }
     ]
+
+    this.comments$.subscribe(comments => {
+      comments.forEach(c => {
+        if(c.replyCount != 0){
+          this.expandedComments[c.id] = false
+          this.loadedReplyComment[c.id] = false
+        }
+      })
+    })
+  }
+
+  toggleReplies(commentId: string) {
+    this.expandedComments[commentId] = !this.expandedComments[commentId];
+
+    if(!this.loadedReplyComment[commentId]){
+      this.commentService.loadReplyComments(commentId);
+      this.loadedReplyComment[commentId] = true
+    }
   }
 
   addIntoCart(){
@@ -168,4 +206,33 @@ export class DetailProductPageComponent implements OnInit{
     return Promise.resolve(this.getData());
   }
 
+  handleKeyDown(event: KeyboardEvent) {
+    if (event.key === 'Enter' && !event.shiftKey) {
+      event.preventDefault();
+      if (this.commentContent.trim()) this.postComment();
+    }
+  }
+
+  postComment(){
+    this.commentService.postComment(this.id, this.commentContent, this.parentCommentId)
+    this.commentContent = ''
+  }
+
+  reply(id: string, name: string) {
+    this.parentCommentId = id;
+    this.replyInput.nativeElement.focus();
+    this.commentContent = name + ' ';
+  }
+
+  deleteComment(id: number){
+    this.commentService
+  }
+
+  updateComment(id: number){
+
+  }
+
+  reportComment(id: number){
+
+  }
 }

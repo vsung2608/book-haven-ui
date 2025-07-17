@@ -21,28 +21,28 @@
   font-family: "Plus Jakarta Sans", sans-serif;
 }
 
-.main .card-das, .main .chart-section .chart-das{
+.main .form-section{
+  padding: 20px;
   background: #FFFFFF;
-  margin-bottom: 1rem;
-  box-shadow: 0 3px 4px #0000001a, 0 24px 36px #0000000a;
-  border-radius: 14px;
-  padding: 0 !important;
-  overflow: hidden;
+  border-radius: 10px;
+  font-size: 13px;
+  box-shadow: 0 3px 4px #0000001a,0 24px 36px #0000000a;
 }
 
-.main .chart-section .chart-das{
-  padding: 30px 20px !important;
+.main .form-section input{
+  font-size: 14px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+  outline: none;
 }
 
-::ng-deep .p-timeline-vertical .p-timeline-event-opposite {
-  display: none;
-  width: 0;
-  padding: 0;
-  margin: 0;
+.main .form-section .child-section{
+  padding: 10px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
 }
 
-.main .chart-section .chart-das .info hr{
-  margin: 11px;
+.main .form-section .child-section button{
+  font-size: 14px;
 }
-
-

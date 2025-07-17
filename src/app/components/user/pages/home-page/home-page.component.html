@@ -1,10 +1,7 @@
 <main class="main">
-
   <!-- Hero Section -->
   <section id="hero" class="hero section dark-background">
-
     <div id="hero-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
-
       <div class="carousel-item active">
         <img src="../../../../../assets/img/hero-carousel/hero-carousel-1.jpg" alt="">
         <div class="container">
@@ -351,14 +348,93 @@
         <div class="col-xl-3 col-md-4 client-logo">
           <img src="../../../../../assets/img/brands/scholastic.png" class="img-fluid" alt="">
         </div><!-- End Client Item -->
-
       </div>
+    </div>
+  </section><!-- /Clients Section -->
+</main>
 
+<div class="chatbot" [class.show-chatbot]="isChatOpen">
+  <!-- Toggle Button -->
+  <button id="chatbot-toggle" (click)="toggleChat()">
+    <span><i class="pi pi-microchip-ai"></i></span>
+    <span><i class="pi pi-times"></i></span>
+  </button>
+
+  <!-- Chatbot Popup -->
+  <div class="chatbot-popup" *ngIf="isChatOpen"  pAnimateOnScroll enterClass="animate-enter fade-in-10 slide-in-from-t-20 animate-duration-1000" >
+    <!-- Chatbot Header -->
+    <div class="chat-header d-flex justify-content-between align-items-center">
+      <div class="header-info d-flex align-items-center">
+        <span class="chat-avatar me-2"><i class="pi pi-microchip-ai"></i></span>
+        <span class="logo-text text-white fw-bold">Chatbot</span>
+      </div>
+      <div class="text-white" (click)="closeChat()"><i class="pi pi-angle-down" id="close-chatbot"></i></div>
     </div>
 
-  </section><!-- /Clients Section -->
+    <!-- Chatbot Body-->
+    <div class="chat-body" #chatBody>
+      <div class="message bot-message">
+        <span class="chat-avatar"><i class="pi pi-microchip-ai"></i></span>
+        <div class="message-text">Hey there <br /> How can I help you today?</div>
+      </div>
 
-</main>
+      <div *ngFor="let msg of messages" [ngClass]="msg.type" class="message">
+        <ng-container *ngIf="msg.type === 'bot-message'">
+          <span class="chat-avatar"><i class="pi pi-microchip-ai"></i></span>
+        </ng-container>
+
+        <div class="message-text">
+          <ng-container *ngIf="msg.text === '...'; else normalText">
+            <div class="thinking-indicator">
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </div>
+          </ng-container>
+          <!-- Nếu là tin nhắn bình thường -->
+          <ng-template #normalText>
+            {{ msg.text }}
+          </ng-template>
+        </div>
+        <img *ngIf="msg.image" [src]="msg.image" class="attachment" />
+      </div>
+    </div>
+
+    <!-- Chatbot Footer -->
+    <div class="chat-footer">
+      <form (submit)="sendMessage($event)" class="chat-form">
+      <textarea
+        #messageInput
+        class="message-input"
+        placeholder="Message ..."
+        [(ngModel)]="message"
+        name="message"
+        (keydown)="handleKeyDown($event)"
+        (input)="resizeInput()"
+        required
+      ></textarea>
+
+        <div class="chat-controls">
+          <button type="button"><i class="pi pi-face-smile"></i></button>
+
+          <!-- File Upload -->
+          <div class="file-upload-wrapper" [class.file-uploaded]="fileUploaded">
+            <input type="file" #fileInput accept="image/*" hidden (change)="onFileSelected($event)" />
+            <img *ngIf="previewSrc" [src]="previewSrc" />
+            <button type="button" id="file-cancel" (click)="cancelFile()">
+              <i class="pi pi-times"></i>
+            </button>
+            <button type="button" id="file-upload" (click)="fileInput.click()">
+              <i class="pi pi-link"></i>
+            </button>
+          </div>
+
+          <button type="submit" id="send-message"><i class="pi pi-send"></i></button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 
 <!-- Scroll Top -->
 <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>

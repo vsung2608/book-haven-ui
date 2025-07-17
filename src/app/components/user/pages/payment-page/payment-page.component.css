@@ -1,3 +1,5 @@
+@import "primeicons/primeicons.css";
+
 #main{
   margin: 40px 100px;
 }
@@ -9,7 +11,7 @@
 
 .main .address-confirm input{
   width: 100%;
-  padding: 10px 5px;
+  padding: 10px 12px;
   outline: none;
   border-radius: 5px;
   border: 1px solid #cbd5e1;
@@ -74,6 +76,52 @@
 
 .main .payment-method .active .icon{
   background: white;
+}
+
+.custom-border {
+  position: relative;
+  display: inline-block;
+  width: 300px;
+  height: 300px;
+}
+
+.corner-top-left,
+.corner-top-right,
+.corner-bottom-left,
+.corner-bottom-right {
+  position: absolute;
+  width: 25%;
+  height: 25%;
+  border: 2px solid transparent;
+  box-sizing: border-box;
+}
+
+.corner-top-left {
+  top: 0;
+  left: 0;
+  border-top-color: black;
+  border-left-color: black;
+}
+
+.corner-top-right {
+  top: 0;
+  right: 0;
+  border-top-color: black;
+  border-right-color: black;
+}
+
+.corner-bottom-left {
+  bottom: 0;
+  left: 0;
+  border-bottom-color: black;
+  border-left-color: black;
+}
+
+.corner-bottom-right {
+  bottom: 0;
+  right: 0;
+  border-bottom-color: black;
+  border-right-color: black;
 }
 
 

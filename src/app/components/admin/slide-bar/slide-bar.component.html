@@ -1,94 +1,101 @@
 <aside id="sidebar" class="sidebar" th:fragment="sidebar">
 
   <ul class="sidebar-nav" id="sidebar-nav">
-
+    <li class="nav-heading">Dashboard</li>
     <li class="nav-item">
-      <a class="nav-link " href="index.html">
+      <a class="nav-link " routerLink="/admin">
         <i class="bi bi-grid"></i>
-        <span>Dashboard</span>
+        <span>E-Commerce</span>
       </a>
-    </li><!-- End Dashboard Nav -->
+    </li>
 
+    <li class="nav-heading">Quản lý</li>
     <li class="nav-item">
-      <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-        <i class="bi bi-menu-button-wide"></i><span>Thêm dữ liệu</span><i class="bi bi-chevron-down ms-auto"></i>
+      <a class="nav-link collapsed" data-bs-target="#products-mng" data-bs-toggle="collapse" href="#">
+        <i class="bi bi-book-half"></i><span>Sản phẩm</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
-      <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+      <ul id="products-mng" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         <li>
-          <a href="">
-            <i class="bi bi-circle"></i><span>Sản phẩm</span>
+          <a routerLink="products">
+            <i class="pi pi-list" style="font-size: 0.9rem"></i><span>Danh sách</span>
           </a>
         </li>
         <li>
-          <a href="components-accordion.html">
-            <i class="bi bi-circle"></i><span>Hãng cung cấp</span>
+          <a routerLink="products/add">
+            <i class="pi pi-plus" style="font-size: 0.9rem"></i><span>Thêm mới</span>
           </a>
         </li>
         <li>
-          <a href="components-badges.html">
-            <i class="bi bi-circle"></i><span>Người dùng</span>
+          <a href="#">
+            <i class="pi pi-send" style="font-size: 0.9rem"></i><span>Chi tiết</span>
           </a>
         </li>
       </ul>
     </li><!-- End Components Nav -->
 
     <li class="nav-item">
-      <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-        <i class="bi bi-layout-text-window-reverse"></i><span>Quản lý dữ liệu</span><i
-        class="bi bi-chevron-down ms-auto"></i>
+      <a class="nav-link collapsed" data-bs-target="#orders-mng" data-bs-toggle="collapse" href="#">
+        <i class="bi bi-box-seam"></i><span>Đơn hàng</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
-      <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+      <ul id="orders-mng" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         <li>
-          <a th:href="@{/admin/products}">
-            <i class="bi bi-circle"></i><span>Sản phẩm</span>
+          <a routerLink="customers">
+            <i class="pi pi-list" style="font-size: 0.9rem"></i><span>Danh sách</span>
           </a>
         </li>
         <li>
-          <a th:href="@{/admin/brands}">
-            <i class="bi bi-circle"></i><span>Hãng cung cấp</span>
-          </a>
-        </li>
-        <li>
-          <a href="tables-data.html">
-            <i class="bi bi-circle"></i><span>Người dùngs</span>
-          </a>
-        </li>
-        <li>
-          <a th:href="@{/admin/orders}">
-            <i class="bi bi-circle"></i><span>Đơn hàng</span>
+          <a href="#">
+            <i class="pi pi-send" style="font-size: 0.9rem"></i><span>Chi tiết</span>
           </a>
         </li>
       </ul>
-    </li><!-- End Tables Nav -->
+    </li><!-- End Components Nav -->
 
     <li class="nav-item">
-      <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
-        <i class="bi bi-bar-chart"></i><span>Xác nhận đơn hàng</span><i class="bi bi-chevron-down ms-auto"></i>
+      <a class="nav-link collapsed" data-bs-target="#blogs-mng" data-bs-toggle="collapse" href="#">
+        <i class="bi bi-pencil-square"></i><span>Bài viết</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
-    </li><!-- End Charts Nav -->
-
-    <li class="nav-item">
-      <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
-        <i class="bi bi-gem"></i><span>Icons</span><i class="bi bi-chevron-down ms-auto"></i>
-      </a>
-      <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+      <ul id="blogs-mng" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         <li>
-          <a href="icons-bootstrap.html">
-            <i class="bi bi-circle"></i><span>Bootstrap Icons</span>
+          <a href="#">
+            <i class="pi pi-list" style="font-size: 0.9rem"></i><span>Danh sách</span>
           </a>
         </li>
         <li>
-          <a href="icons-remix.html">
-            <i class="bi bi-circle"></i><span>Remix Icons</span>
+          <a href="#">
+            <i class="pi pi-plus" style="font-size: 0.9rem"></i><span>Thêm mới</span>
           </a>
         </li>
         <li>
-          <a href="icons-boxicons.html">
-            <i class="bi bi-circle"></i><span>Boxicons</span>
+          <a href="#">
+            <i class="pi pi-send" style="font-size: 0.9rem"></i><span>Chi tiết</span>
           </a>
         </li>
       </ul>
-    </li><!-- End Icons Nav -->
+    </li><!-- End Components Nav -->
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" data-bs-target="#customers-mng" data-bs-toggle="collapse" href="#">
+        <i class="bi bi-person-bounding-box"></i><span>Khách hàng</span><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul id="customers-mng" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <li>
+          <a href="#">
+            <i class="pi pi-list" style="font-size: 0.9rem"></i><span>Danh sách</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class="pi pi-plus" style="font-size: 0.9rem"></i><span>Thêm mới</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class="pi pi-send" style="font-size: 0.9rem"></i><span>Chi tiết</span>
+          </a>
+        </li>
+      </ul>
+    </li><!-- End Components Nav -->
 
     <li class="nav-heading">Pages</li>
 

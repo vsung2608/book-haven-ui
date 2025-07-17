@@ -1,6 +1,9 @@
+@import "primeicons/primeicons.css";
+
 .main{
   padding: 50px 0;
 }
+
 .main .right-content, .main .left-content{
   padding: 30px;
   box-shadow: 0 0 20px rgba(1, 41, 112, 0.1);
@@ -155,10 +158,115 @@
   border-radius: 25px;
 }
 
+.comment-form button:hover{
+  background: #0bc26a;
+}
+
 .comment-form input{
   width: calc(100% - 80px);
   outline: none;
   padding: 5px 10px;
   border-radius: 25px;
+}
+
+.comment-section {
+  max-height: 500px;
+  overflow: scroll;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+.comment{
+  position: relative;
+}
+
+.child-comment .avatar{
+  position: relative;
+}
+
+
+.comment .avatar, .child-comment .avatar{
+  width: 50px;
+  height: 50px;
+}
+
+.avatar-wrapper {
+  position: relative;
+  width: 50px;
+}
+
+.avatar-line-vertical {
+  position: absolute;
+  top: 50px;
+  bottom: 0;
+  left: 25px;
+  width: 1px;
+  opacity: 0.2;
+  background-color: black;
+  z-index: 0;
+}
+
+.child-comment {
+  position: relative;
+}
+
+.child-comment .dot-on-line {
+  position: absolute;
+  top: 25px;
+  left: -26.5px; /* đúng trục line dọc */
+  width: 8px;
+  height: 8px;
+  background-color: #059652;
+  border-radius: 50%;
+  z-index: 100;
+}
+.comment .avatar img, .child-comment .avatar img{
+  width: 100%;
+  height: 100%;
+}
+
+.card .related-product{
+  box-shadow: 0 0 20px rgba(1, 41, 112, 0.1);
+  margin: 15px 15px 15px 0;
+  padding: 10px;
+}
+
+.card .related-product .image{
+  height: 180px;
+  width: 120px;
+  object-fit: cover;
+  padding: 0;
+}
+
+.card .related-product .image img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card .info .button button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 100%;
+}
+
+.card .info .button button:first-child{
+  background: #059652;
+  border-radius: 5px;
+  font-size: 13px;
+  padding: 10px 10px;
+  color: white;
+  margin-bottom: 10px;
+}
+
+.card .info .button button:last-child{
+  background: #0a5f9f;
+  border-radius: 5px;
+  font-size: 13px;
+  padding: 10px 10px;
+  color: white;
 }
 

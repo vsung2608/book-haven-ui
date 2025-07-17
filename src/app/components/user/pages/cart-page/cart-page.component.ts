@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {CartService} from '../../../../services/cart/cart.service'
 import {Item} from '../../../../model/Cart';
 import {CommonModule, CurrencyPipe} from '@angular/common';
-import {filter, Observable, tap} from 'rxjs';
+import {Observable} from 'rxjs';
 import {MessageService} from 'primeng/api';
 import {ToastModule} from 'primeng/toast';
 import {Router} from '@angular/router';
@@ -77,7 +77,7 @@ export class CartPageComponent implements OnInit{
   }
 
   upQUantity(item: any){
-    if(item.quantity > 1){
+    if(item.quantity >= 1){
       item.quantity++;
       item.totalPrice += item.promotionalPrice
     }

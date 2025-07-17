@@ -1,24 +1,23 @@
 <div class="main" id="main">
   <div class="row">
     <div class="col-8">
-      <form [formGroup]="form">
         <div class="address-confirm row mb-4">
           <div class="col-12 fs-3 fw-bold">Địa chỉ nhận hàng</div>
           <div class="col-4 mt-3">
             <p-floatlabel variant="on">
-              <input pInputText id="fullName"  autocomplete="off" formControlName="fullName"/>
+              <input pInputText id="fullName"  autocomplete="off" [(ngModel)]="fullnameVal"/>
               <label for="fullName">Họ và tên</label>
             </p-floatlabel>
           </div>
           <div class="col-4 mt-3">
             <p-floatlabel variant="on" >
-              <input pInputText id="phoneNumber" autocomplete="off" formControlName="phoneNumber"/>
+              <input pInputText id="phoneNumber" autocomplete="off" [(ngModel)]="phoneVal"/>
               <label for="phoneNumber">Số điện thoại</label>
             </p-floatlabel>
           </div>
           <div class="col-4 mt-3">
             <p-floatlabel variant="on">
-              <input pInputText id="email" autocomplete="off" formControlName="email"/>
+              <input pInputText id="email" autocomplete="off" [(ngModel)]="emailVal"/>
               <label for="email">Email</label>
             </p-floatlabel>
           </div>
@@ -42,18 +41,17 @@
           </div>
           <div class="col-12 mt-3">
             <p-floatlabel variant="on">
-              <input pInputText id="detailAddress" autocomplete="off" formControlName="detailAddress"/>
+              <input pInputText id="detailAddress" autocomplete="off" [(ngModel)]="detailAddressVal"/>
               <label for="detailAddress">Địa chỉ chi tiết</label>
             </p-floatlabel>
           </div>
           <div class="col-12 mt-3">
             <p-floatlabel variant="on">
-              <input pInputText id="note" autocomplete="off" formControlName="note"/>
+              <input pInputText id="note" autocomplete="off" [(ngModel)]="noteVal"/>
               <label for="note">Ghi chú</label>
             </p-floatlabel>
           </div>
         </div>
-      </form>
     </div>
     <div class="col-4">
       <div class="payment-method">
@@ -120,3 +118,49 @@
 </div>
 <p-toast></p-toast>
 <p-confirmdialog />
+<p-dialog header="Thanh toán bằng mã QR" [(visible)]="qrCodeVisiable" [modal]="true" [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+  <hr>
+  <div class="row justify-content-center align-items-start">
+
+    <!-- Cột trái: QR -->
+    <div class="col-md-5 mb-3">
+      <div class="border p-3 custom-border text-center">
+        <!-- Viền góc -->
+        <div class="corner-top-left"></div>
+        <div class="corner-top-right"></div>
+        <div class="corner-bottom-left"></div>
+        <div class="corner-bottom-right"></div>
+
+        <!-- Ảnh QR -->
+        <img id="img_qr_code" class="img-fluid rounded"
+             src="https://qr.sepay.vn/img?acc=26080426082004&bank=MBBank&amount=&des=&template=compact"
+             alt="QR Code">
+      </div>
+    </div>
+
+    <!-- Cột phải: Thông tin -->
+    <div class="col-md-7">
+      <div class="text-center bg-success text-white p-2 rounded-top-2">Thông tin giao dịch</div>
+      <table class="table table-bordered">
+        <tbody>
+        <tr>
+          <th scope="row">Ngân hàng</th>
+          <td>MBBank</td>
+        </tr>
+        <tr>
+          <th scope="row">Số tài khoản</th>
+          <td>26080426082004</td>
+        </tr>
+        <tr>
+          <th scope="row">Số tiền</th>
+          <td>0</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="text-center">
+      <i class="pi pi-spin pi-spinner" style="font-size: 1.5rem"></i>
+      <div>Đang chờ thanh toán ...</div>
+    </div>
+  </div>
+</p-dialog>

@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
 import {InfiniteScrollDirective} from 'ngx-infinite-scroll';
 import {ProductService} from '../../../../services/product/product.service';
-import {Page, Products} from '../../../../model/Products';
+import {Page, ProductLimitedFields, Products} from '../../../../model/Products';
 import {CommonModule, CurrencyPipe} from '@angular/common';
 import {RatingModule} from 'primeng/rating';
 import {FormsModule} from '@angular/forms';
@@ -29,11 +29,13 @@ export class ProductPageComponent implements AfterViewInit{
   totalPages?: number;
   pageSize: number = 0;
   totalElements?: number;
-  products: Array<Products> = [];
+  products: Array<ProductLimitedFields> = [];
   currentPageName: string = 'total';
   sort: string = '';
   currentId: number = 0;
   layout: 'grid' | 'list' = 'grid';
+  isLoading: boolean = false
+  hasMore: boolean = true
   @ViewChild('btn1') btn1: ElementRef<HTMLButtonElement> | undefined
   @ViewChild(ConfirmPopup) confirmPopup!: ConfirmPopup;
 
@@ -96,19 +98,23 @@ export class ProductPageComponent implements AfterViewInit{
   }
 
   loadMoreProducts(){
+    if(this.isLoading || !this.hasMore) return;
+    this.isLoading = true
+    this.currentPage++
     if(this.currentPageName === 'total'){
-      this.productService.getProducts(this.currentPage++, this.pageSize).pipe()
+      this.productService.getProducts(this.currentPage, this.pageSize).pipe()
         .subscribe(page => this.setAtrribute(page));
     }else if(this.currentPageName === 'latest'){
-      this.productService.getLatestProducts(this.currentPage++, this.pageSize).pipe()
+      this.productService.getLatestProducts(this.currentPage, this.pageSize).pipe()
         .subscribe(page => this.setAtrribute(page));
     }else if(this.currentPageName === 'best-seller'){
-      this.productService.getBestSellerProducts(this.currentPage++, this.pageSize).pipe()
+      this.productService.getBestSellerProducts(this.currentPage, this.pageSize).pipe()
         .subscribe(page => this.setAtrribute(page));
     }else if(this.currentPageName === 'sort'){
-      this.productService.getSortedByPriceProducts(this.currentPage++, this.pageSize, this.sort).pipe()
+      this.productService.getSortedByPriceProducts(this.currentPage, this.pageSize, this.sort).pipe()
         .subscribe(page => this.setAtrribute(page));
     }
+    this.isLoading = false
   }
 
   addProductInCart(){
@@ -116,11 +122,18 @@ export class ProductPageComponent implements AfterViewInit{
   }
 
   setAtrribute(page: Page){
-    this.currentPage = page.currentPage;
-    this.totalPages = page.totalPages;
-    this.pageSize = page.pageSize;
-    this.totalElements = page.totalElements;
-    this.products = page.data;
+    if(page.data.length === 0){
+      this.hasMore = false
+    }else {
+      this.currentPage = page.currentPage;
+      this.totalPages = page.totalPages;
+      this.pageSize = page.pageSize;
+      this.totalElements = page.totalElements;
+      const combined = [...this.products, ...page.data];
+      this.products = combined.filter((item, index, self) =>
+        index === self.findIndex(p => p.id === item.id)
+      );
+    }
   }
 
   cleanPage(){

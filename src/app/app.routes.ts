@@ -11,6 +11,9 @@ import {DetailProductPageComponent} from './components/user/pages/detail-product
 import {AdminLayoutComponent} from './layout/admin-layout/admin-layout.component';
 import {DashboardPageComponent} from './components/admin/pages/dashboard-page/dashboard-page.component';
 import {PaymentPageComponent} from './components/user/pages/payment-page/payment-page.component';
+import {ProductListComponent} from './components/admin/pages/product-page/product-list/product-list.component';
+import {ProductAddComponent} from './components/admin/pages/product-page/product-add/product-add.component';
+import {CustomerListComponent} from './components/admin/pages/customer-page/customer-list/customer-list.component';
 
 export const routes: Routes = [
   {
@@ -30,7 +33,10 @@ export const routes: Routes = [
     path: 'admin',
     component: AdminLayoutComponent,
     children: [
-      {path: '', component: DashboardPageComponent}
+      { path: '', component: DashboardPageComponent },
+      { path: 'products', component: ProductListComponent },
+      { path: 'products/add', component: ProductAddComponent },
+      { path: 'customers', component: CustomerListComponent }
     ]
   },
 

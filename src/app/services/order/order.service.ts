@@ -19,8 +19,15 @@ export class OrderService {
     })
     let request: PlaceOrderRequest = {
       reference: 'DH001', paymentMethod: method, totalPrice: totalPrice, orderLines: items, status: Status.PENDING,
-      note: note, shippingAddress: shippingAddress, shippingFee: shippingFee, customerId: 1, paymentStatus: PaymentStatus.UNPAID
+      note: note, shippingAddress: shippingAddress, shippingFee: shippingFee, customerId: '1', paymentStatus: PaymentStatus.UNPAID
     }
-    this.httpClient.post(OrderService.ORDER_API_URL, request);
+    this.httpClient.post(OrderService.ORDER_API_URL, request).subscribe({
+      next: data => {
+        console.log("success")
+      },
+      error: error => {
+        console.error('There was an error!', error);
+      }
+    });
   }
 }
